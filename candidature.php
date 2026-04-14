@@ -7,12 +7,13 @@ $filiere   = '';
 $motivation = '';
 $erreurs   = [];
 $reglement = '';
-//$confemail='';
+$confemail='';
 
 if ($_SERVER["REQUEST_METHOD"]==="POST"):
     $prenom    = $_POST["prenom"]??"";
     $nom       = $_POST["nom"]??"";
     $email     = $_POST["email"]??"";
+    $confemail = $_POST["confemail"]??"";
     $age       = $_POST["age"]??"";
     $filiere   = $_POST["filiere"]??"";
     $motivation = $_POST["motivation"]??"";
@@ -38,6 +39,10 @@ if ($_SERVER["REQUEST_METHOD"]==="POST"):
         // modif de la condition pour appliquer la verification php
         $erreurs[] = "La motivation doit contenir entre 30 et 500 caractères.";
 
+    }
+     if ( $confemail!==$email){
+        $erreurs[]="Les deux adresses email ne correspondent pas.";
+        
     }
     if (!$reglement){
         $erreurs[]="Vous devez accepter le règlement";
@@ -140,11 +145,12 @@ endif;
 
                 <label for="mtv">Motivation:</label>
                 textarea name="motivation" id="mtv" rows="6" minlength="30" maxlength="500" ><?php echo $motivation;?></textarea>
-
                 <label for="reglement">J'ai lu et j'accepte le règlement du club</label>
                 <input type="checkbox" name="reglement" id="reglement" value="1" <?php echo $reglement?"checked":'';?>>
 
                 <button type="submit"> Envoyer ma candidature</button>
+                 <label for="confemail">Confirmez votre email:</label>
+                <input type="text" name="confemail" id="confemail" value="<?php echo $confemail; ?>" >
 
 
 
