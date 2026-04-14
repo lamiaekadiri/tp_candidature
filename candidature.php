@@ -34,9 +34,8 @@ if ($_SERVER["REQUEST_METHOD"]==="POST"):
     if (empty($filiere)){
         $erreurs[]="Veuillez choisir une filière. ";
     }
-     if (strlen($motivation) < 30 || strlen($motivation) > 500) { 
-        // modif de la condition pour appliquer la verification php
-        $erreurs[] = "La motivation doit contenir entre 30 et 500 caractères.";
+    if (strlen($motivation) < 30 ) {
+    $erreurs[] = "La motivation doit contenir au moins 30 caractères.";
 
     }
     if (!$reglement){
@@ -55,7 +54,7 @@ endif;
     <title>Document</title>
 </head>
 <body>
-
+    
       <?php if(empty($erreurs) && $_SERVER['REQUEST_METHOD']==='POST'):?>
           <h1>Candidature reçue!</h1>
           <br>
@@ -67,11 +66,11 @@ endif;
             <li>Email: <?php echo $email;?></li>
 
             <li>Age: <?php echo $age;?></li>   
-            
+
             <li>Filière: <?php echo $filiere;?></li>
 
             <li>Lettre de motivation: <?php echo $motivation;?></li>
-            
+
           </ul>
           <br>
           <p>Votre candidature a bien été enregistrée.Nous vous contacterons à l'adresse indiquée.</p>
@@ -82,7 +81,7 @@ endif;
 
         <?php if (!empty($erreurs)&& $_SERVER['REQUEST_METHOD']==="POST"):
          ?>
-         
+
           <ul class="erreurs">
             <?php foreach($erreurs as $e):?>
                 <li><?php echo $e;?></li>
@@ -139,8 +138,7 @@ endif;
                 <input type="text" name="email" id="email" value="<?php echo $email; ?>" placeholder="ex:email@gmail.com">
 
                 <label for="mtv">Motivation:</label>
-                           
-                <textarea name="motivation" id="mtv" rows="6" minlength="30" maxlength="500" ><?php echo $motivation;?></textarea>
+                <textarea name="motivation" id="mtv" rows="6"  ><?php echo $motivation;?></textarea>
 
                 <label for="reglement">J'ai lu et j'accepte le règlement du club</label>
                 <input type="checkbox" name="reglement" id="reglement" value="1" <?php echo $reglement?"checked":'';?>>
@@ -151,7 +149,9 @@ endif;
 
             </form>
         </div>
-   <?php endif; ?>
+        
+    <?php endif; ?>
+   
 
     <footer>
         <?php if(empty($erreurs) && $_SERVER['REQUEST_METHOD']==='POST'):?>
@@ -161,4 +161,6 @@ endif;
         <?php endif;?>
     </footer> 
 
+
 </body>
+</html>
