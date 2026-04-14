@@ -34,8 +34,9 @@ if ($_SERVER["REQUEST_METHOD"]==="POST"):
     if (empty($filiere)){
         $erreurs[]="Veuillez choisir une filière. ";
     }
-    if (strlen($motivation) < 30 ) {
-    $erreurs[] = "La motivation doit contenir au moins 30 caractères.";
+     if (strlen($motivation) < 30 || strlen($motivation) > 500) { 
+        // modif de la condition pour appliquer la verification php
+        $erreurs[] = "La motivation doit contenir entre 30 et 500 caractères.";
 
     }
     if (!$reglement){
@@ -138,7 +139,8 @@ endif;
                 <input type="text" name="email" id="email" value="<?php echo $email; ?>" placeholder="ex:email@gmail.com">
 
                 <label for="mtv">Motivation:</label>
-                <textarea name="motivation" id="mtv" rows="6"  ><?php echo $motivation;?></textarea>
+                           
+                <textarea name="motivation" id="mtv" rows="6" minlength="30" maxlength="500" ><?php echo $motivation;?></textarea>
 
                 <label for="reglement">J'ai lu et j'accepte le règlement du club</label>
                 <input type="checkbox" name="reglement" id="reglement" value="1" <?php echo $reglement?"checked":'';?>>
