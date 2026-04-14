@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"]==="POST"):
         $erreurs[]="Veuillez choisir une filière. ";
     }
     if (strlen($motivation) < 30 ) {
-    $erreurs[] = "La motivation doit contenir au moins caractères.";
+       $erreurs[] = "La motivation doit contenir au moins 30 caractères.";
     
     }
     if (!$reglement){
@@ -52,27 +52,18 @@ endif;
     <title>Document</title>
 </head>
 <body>
-         <?php if (!empty($erreurs)&& $_SERVER['REQUEST_METHOD']==="POST"):
-         ?>
-
-        <ul class="erreurs">
-            <?php foreach($erreurs as $e):?>
-                <li><?php echo $e;?></li>
-            <?php endforeach;?>
-        </ul>
-
-        <?php endif; ?>
+         
         <div class="container">
             <form action="candidature.php" method="POST">
 
                 <label for="prenom">Prénom:</label>
-                <input type="text" id="prenom" name="prenom"  placeholder="Saisissez votre prénom">
+                 <input type="text" id="prenom" name="prenom" value="<?php echo $prenom; ?>" placeholder="Saisissez votre prénom">
 
                 <label for="nom">Nom:</label>
-                <input type="text" name="nom" id="nom"  placeholder="Saisissez votre nom">
+                 <input type="text" name="nom" id="nom"  value="<?php echo $nom; ?>" placeholder="Saisissez votre nom">
 
                 <label for="age">Age:</label>
-                <input type="number" name="age" id="age" placeholder="Saisissez votre âge">
+                  <input type="number" name="age" id="age" value="<?php echo $age; ?>" placeholder="Saisissez votre âge">
 
                 <label for="filiere">Filière:</label>
 
@@ -82,30 +73,35 @@ endif;
 
                     <option value='Informatique'
                     >
+                        <?php echo ($filiere === 'Informatique') ? 'selected' : ''; ?>>
                         Informatique
 
                     </option>
 
                     <option value="Electronique"
                     >
+                         <?php echo ($filiere === 'Electronique') ? 'selected' : ''; ?>>
                         Electronique
 
                     </option>
 
                     <option value="Mecanique"
                     >
+                         <?php echo ($filiere === 'Mecanique') ? 'selected' : ''; ?>>
                         Mecanique
 
                     </option>
 
                     <option value="Mathématiques"
                     >
+                         <?php echo ($filiere === 'Mathématiques') ? 'selected' : ''; ?>>
                         Mathématiques
 
                     </option>
 
                     <option value="Physique/Chimie"
                     >
+                        <?php echo ($filiere === 'Physique/Chimie') ? 'selected' : ''; ?>>
                         Physique/Chimie
 
                     </option>
@@ -113,17 +109,17 @@ endif;
                 </select>
 
                 <label for="email">Email:</label>
-                <input type="text" name="email" id="email"  placeholder="ex:email@gmail.com">
-
+                
+                <input type="text" name="email" id="email" value="<?php echo $email; ?>" placeholder="ex:email@gmail.com">
 
                 <label for="mtv">Motivation:</label>
 
-                <textarea name="motivation" id="mtv" rows="6"  ></textarea>
+                 <textarea name="motivation" id="mtv" rows="6"  ><?php echo $motivation;?></textarea>
 
                 <label for="reglement">J'ai lu et j'accepte le règlement du club</label>
-                <input type="checkbox" name="reglement" id="reglement" value="1">
+                <input type="checkbox" name="reglement" id="reglement" value="1" <?php echo $reglement?"checked":'';?>>
 
-                <button type="submit"> Envoyer ma candidature</button>
+                 <button type="submit"> Envoyer ma candidature</button>
 
 
 
