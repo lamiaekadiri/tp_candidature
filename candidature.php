@@ -54,7 +54,8 @@ endif;
     <title>Document</title>
 </head>
 <body>
-    <?php if(empty($erreurs) && $_SERVER['REQUEST_METHOD']==='POST'):?>
+
+      <?php if(empty($erreurs) && $_SERVER['REQUEST_METHOD']==='POST'):?>
           <h1>Candidature reçue!</h1>
           <br>
           <ul>
@@ -148,8 +149,7 @@ endif;
 
             </form>
         </div>
-        
-    <?php endif; ?>
+   <?php endif; ?>
 
     <footer>
         <?php if(empty($erreurs) && $_SERVER['REQUEST_METHOD']==='POST'):?>
@@ -160,5 +160,3 @@ endif;
     </footer> 
 
 </body>
-
-</html>
