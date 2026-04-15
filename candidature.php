@@ -29,14 +29,14 @@ if ($_SERVER["REQUEST_METHOD"]==="POST"):
         $erreurs[]="L'adresse email est invalide.";
     }
     if (empty($age)||!is_numeric($age)||$age<16 ||$age>30){
-        //même si je pense qu'on pourrait nous passer de empty($age): !is_numeric faisant le travail
+      
         $erreurs[]="L'âge est invalide.";
     }
     if (empty($filiere)){
         $erreurs[]="Veuillez choisir une filière. ";
     }
      if (strlen($motivation) < 30 || strlen($motivation) > 500) { 
-        // modif de la condition pour appliquer la verification php
+        
         $erreurs[] = "La motivation doit contenir entre 30 et 500 caractères.";
 
     }
@@ -59,6 +59,18 @@ endif;
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+<script>
+const textarea = document.getElementById('mtv');
+const compteur = document.getElementById('compteur');
+
+function mettreAJourCompteur() {
+    compteur.textContent = textarea.value.length + " / 300 caractères";
+}
+
+textarea.addEventListener('input', mettreAJourCompteur);
+
+mettreAJourCompteur();
+</script>
 <body>
     
       <?php if(empty($erreurs) && $_SERVER['REQUEST_METHOD']==='POST'):?>
@@ -144,8 +156,8 @@ endif;
                 <input type="text" name="email" id="email" value="<?php echo $email; ?>" placeholder="ex:email@gmail.com">
 
                 <label for="mtv">Motivation:</label>
-                textarea name="motivation" id="mtv" rows="6" minlength="30" maxlength="500" ><?php echo $motivation;?></textarea>
-                <label for="reglement">J'ai lu et j'accepte le règlement du club</label>
+                <textarea name="motivation" id="mtv" rows="6" maxlength="300"><?= htmlspecialchars($motivation) ?></textarea>
+                 <p id="compteur"><?= strlen($motivation) ?> / 300 caractères</p>
                 <input type="checkbox" name="reglement" id="reglement" value="1" <?php echo $reglement?"checked":'';?>>
 
                 <button type="submit"> Envoyer ma candidature</button>
@@ -167,7 +179,18 @@ endif;
             </nav>
         <?php endif;?>
     </footer> 
+<script>
+const textarea = document.getElementById('mtv');
+const compteur = document.getElementById('compteur');
 
+function mettreAJourCompteur() {
+    compteur.textContent = textarea.value.length + " / 300 caractères";
+}
+
+textarea.addEventListener('input', mettreAJourCompteur);
+
+mettreAJourCompteur();
+</script>
 
 </body>
 </html>
